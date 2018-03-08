@@ -184,9 +184,6 @@ final class CameraConfigurationManager {
 
     theCamera.setParameters(parameters);
 
-    /** Adding for portrait scanning **/
-    theCamera.setDisplayOrientation(90);
-
     theCamera.setDisplayOrientation(cwRotationFromDisplayToCamera);
 
     Camera.Parameters afterParameters = theCamera.getParameters();

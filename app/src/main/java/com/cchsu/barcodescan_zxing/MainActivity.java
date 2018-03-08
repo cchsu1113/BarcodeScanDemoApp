@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 isSingleSacn = true;
                 Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
                 intent.setAction(Scan.ACTION); //啟動掃描動作，一定要設定
-                //intent.putExtra(Scan.WIDTH, 1600); //調整掃描視窗寬度(Optional)
-                //intent.putExtra(Scan.HEIGHT, 850); //調整掃描視窗高度(Optional)
+                intent.putExtra(Scan.WIDTH, 1600); //調整掃描視窗寬度(Optional)
+                intent.putExtra(Scan.HEIGHT, 850); //調整掃描視窗高度(Optional)
                 intent.putExtra(Scan.RESULT_DISPLAY_DURATION_MS, 100L); //設定掃描成功地顯示時間(Optional)
                 intent.putExtra(Scan.PROMPT_MESSAGE, "請將條碼置於鏡頭範圍進行掃描"); //客製化掃描視窗的提示文字(Optional)
                 //intent.putExtra(Scan.MODE, Scan.ONE_D_MODE);  //限制只能掃一維條碼(預設為全部條碼都支援)
-                intent.putExtra(CaptureActivity.SCAN_MODE_NAME, CaptureActivity.SCAN_SIGLE_MODE);
+                intent.putExtra(CaptureActivity.SACN_MODE_NAME, CaptureActivity.SCAN_SIGLE_MODE);
                 BeepManager.VIBRATE_MODE = true; //掃描成功發出振動:true, 沒有震動:false
                 CameraManager.FORCE_FLASH_MODE = false;
                 CameraManager.FORCE_AUTO_FOCUS = true;
@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 isSingleSacn = false;
                 Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
                 intent.setAction(Scan.ACTION);
-                //intent.putExtra(Scan.WIDTH, 1600); //調整掃描視窗寬度(Optional)
-                //intent.putExtra(Scan.HEIGHT, 850); //調整掃描視窗高度(Optional)
+                intent.putExtra(Scan.WIDTH, 1600); //調整掃描視窗寬度(Optional)
+                intent.putExtra(Scan.HEIGHT, 850); //調整掃描視窗高度(Optional)
                 intent.putExtra(Scan.PROMPT_MESSAGE, "請將條碼置於鏡頭範圍進行掃描");
                 intent.putExtra(Scan.RESULT_DISPLAY_DURATION_MS, 10L);
-                intent.putExtra(CaptureActivity.SCAN_MODE_NAME, CaptureActivity.SCAN_BATCH_MODE);
+                intent.putExtra(CaptureActivity.SACN_MODE_NAME, CaptureActivity.SCAN_BATCH_MODE);
                 BeepManager.VIBRATE_MODE = true;
                 CameraManager.FORCE_FLASH_MODE = false;
                 CameraManager.FORCE_AUTO_FOCUS = true;

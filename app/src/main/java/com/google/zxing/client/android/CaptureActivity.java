@@ -34,8 +34,6 @@ import com.google.zxing.client.android.share.ShareActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -88,13 +86,13 @@ import com.cchsu.barcodescan_zxing.ShipmentInfo;
  * @author Sean Owen
  */
 
-public final class CaptureActivity extends Activity implements SurfaceHolder.Callback, DialogInterface.OnClickListener {
+public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
 
   public static int Number_Order = 0;
   public static String Barcode_Type = "null";
   public static String Barcode_Value = "null";
 
-  public static final String SCAN_MODE_NAME = "SCAN_NODE";
+  public static final String SACN_MODE_NAME = "SCAN_NODE";
   public static final int SCAN_SIGLE_MODE = 0;
   public static final int SCAN_BATCH_MODE = 1;
 
@@ -120,7 +118,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private Result savedResultToShow;
   private ViewfinderView viewfinderView;
   private TextView statusView;
-  //private TextView scanValueView;
   private View resultView;
   private Result lastResult;
   private boolean hasSurface;
@@ -141,10 +138,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private String oldCodeValue = "";
   private Date oldBrushTime = new Date();
   private ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME);
-  private String strBarcodeType = "";
-  private String strBarcodeValue = "";
-  private boolean canGo = true;
-  private String strCodeScanValue = "";
 
   ViewfinderView getViewfinderView() {
     return viewfinderView;
@@ -202,7 +195,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     resultView = findViewById(R.id.result_view);
     statusView = (TextView) findViewById(R.id.status_view);
-    //scanValueView = (TextView) findViewById(R.id.scan_view);
 
     handler = null;
     lastResult = null;
@@ -475,24 +467,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   }
 
-  public void onClick(DialogInterface dialog, int which) {
-      if (which == DialogInterface.BUTTON_POSITIVE) {
-          CaptureActivity.Number_Order++;
-          CaptureActivity.Barcode_Type = strBarcodeType;
-          CaptureActivity.Barcode_Value = strBarcodeValue;
-          oldCodeValue = strBarcodeValue;
-          oldBrushTime.setTime(System.currentTimeMillis()); //更新刷碼時間
-          SCAN_BATCH_VALUE.add(new ShipmentInfo(strBarcodeValue, new Date()));
-          String prompt = "[" + (CaptureActivity.Number_Order) + "] " + CaptureActivity.Barcode_Value;
-          Toast.makeText(CaptureActivity.this, prompt, Toast.LENGTH_SHORT).show();
-          canGo = true;
-      }
-      if (which == DialogInterface.BUTTON_NEGATIVE) {
-          canGo = true;
-      }
-  }
-
-
   /**
    * A valid barcode has been found, so give an indication of success and show the results.
    *
@@ -505,7 +479,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     lastResult = rawResult;
     ResultHandler resultHandler = ResultHandlerFactory.makeResultHandler(this, rawResult);
     Intent it = getIntent();
-    int scan_mode = it.getIntExtra(SCAN_MODE_NAME, SCAN_SIGLE_MODE);
+    int scan_mode = it.getIntExtra(SACN_MODE_NAME, SCAN_SIGLE_MODE);
 
     boolean fromLiveScan = barcode != null;
     if (fromLiveScan) {
@@ -515,58 +489,25 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       drawResultPoints(barcode, scaleFactor, rawResult);
     }
     if (scan_mode == SCAN_BATCH_MODE) { // 連續掃描
+
       // 避免重複掃描，檢查是否一秒內有相同託運單重複，若有，則忽略不計
       if (!initialScan) {  //不是第一次掃描才要檢查
-          if (canGo == false) { //避免alert dialog還未操作完成，又持續處理掃描的條碼
-              try { Thread.sleep(1000); } catch (Exception ignore) { }
-              restartPreviewAfterDelay(BULK_MODE_SCAN_DELAY_MS);
-              return;
-          }
-          if (rawResult.getText().compareToIgnoreCase(oldCodeValue)==0) {
-          // 重複掃描，出現alert dialog
-            //toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500); //重複掃描，發出警示聲
-            toneG.startTone(ToneGenerator.TONE_PROP_BEEP, 100); //重複掃描，發出警示聲
-            canGo = false;
-             // 不顯示對話盒，直接把狀態變成true
-             canGo = true;
-            /**************************************************
-             * 要顯示對話盒的程式碼
-
-            String alertMsg = "重複掃碼：" + oldCodeValue;
-            strBarcodeType = rawResult.getBarcodeFormat().toString();
-            strBarcodeValue = rawResult.getText();;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("警告！");
-            builder.setMessage(alertMsg);
-            builder.setPositiveButton("刷碼", this);
-            builder.setNegativeButton("略過", this);
-            builder.create().show();
-             */
-          }
-          else { //沒有連續重複，或是沒有重複
-              CaptureActivity.Number_Order++;
-              CaptureActivity.Barcode_Type = rawResult.getBarcodeFormat().toString();
-              CaptureActivity.Barcode_Value = rawResult.getText();
-              oldCodeValue = rawResult.getText();
-              oldBrushTime.setTime(System.currentTimeMillis()); //更新刷碼時間
-              SCAN_BATCH_VALUE.add(new ShipmentInfo(rawResult.getText(), new Date()));
-              strCodeScanValue = "[" + (CaptureActivity.Number_Order) + "] " + CaptureActivity.Barcode_Type + " : " + CaptureActivity.Barcode_Value;
-              statusView.setText(strCodeScanValue);
-              //Toast.makeText(CaptureActivity.this, prompt, Toast.LENGTH_SHORT).show();
-          }
-      }
-      else { //第一次掃描
-          CaptureActivity.Number_Order++;
-          CaptureActivity.Barcode_Type = rawResult.getBarcodeFormat().toString();
-          CaptureActivity.Barcode_Value = rawResult.getText();
-          initialScan = false;
-          oldCodeValue = rawResult.getText();
+        if ((rawResult.getText().compareToIgnoreCase(oldCodeValue)==0) && ((new Date().getTime()-oldBrushTime.getTime())<1000)) {
           oldBrushTime.setTime(System.currentTimeMillis()); //更新刷碼時間
-          SCAN_BATCH_VALUE.add(new ShipmentInfo(rawResult.getText(), new Date()));
-          strCodeScanValue = "[" + (CaptureActivity.Number_Order) + "] " + CaptureActivity.Barcode_Type + " : " + CaptureActivity.Barcode_Value;
-          statusView.setText(strCodeScanValue);
-        //Toast.makeText(CaptureActivity.this, prompt, Toast.LENGTH_SHORT).show();
+          toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500); //重複掃描，發出警示聲
+          restartPreviewAfterDelay(BULK_MODE_SCAN_DELAY_MS);
+          return;
+        }
       }
+      CaptureActivity.Number_Order++;
+      CaptureActivity.Barcode_Type = rawResult.getBarcodeFormat().toString();
+      CaptureActivity.Barcode_Value = rawResult.getText();
+      initialScan = false;
+      oldCodeValue = rawResult.getText();
+      oldBrushTime.setTime(System.currentTimeMillis()); //更新刷碼時間
+      SCAN_BATCH_VALUE.add(new ShipmentInfo(rawResult.getText(), new Date()));
+      String prompt = "[" + (CaptureActivity.Number_Order) + "] " + CaptureActivity.Barcode_Value;
+      Toast.makeText(CaptureActivity.this, prompt, Toast.LENGTH_SHORT).show();
       restartPreviewAfterDelay(BULK_MODE_SCAN_DELAY_MS);
         /** adding end **/
     }
@@ -873,9 +814,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   private void resetStatusView() {
     resultView.setVisibility(View.GONE);
-    //statusView.setText(R.string.msg_default_status);
-    if (strCodeScanValue.isEmpty() == true)
-      statusView.setText("請將條碼置於鏡頭範圍進行掃描");
+    statusView.setText(R.string.msg_default_status);
     statusView.setVisibility(View.VISIBLE);
     viewfinderView.setVisibility(View.VISIBLE);
     lastResult = null;

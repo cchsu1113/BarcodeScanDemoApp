@@ -46,8 +46,8 @@ public final class CameraManager {
 
   private static final int MIN_FRAME_WIDTH = 240;
   private static final int MIN_FRAME_HEIGHT = 240;
-  private static final int MAX_FRAME_WIDTH = 800; // = 5/8 * 1080，直立螢幕的寬
-  private static final int MAX_FRAME_HEIGHT = 1200; // = 5/8 * 1920，直立螢幕的高
+  private static final int MAX_FRAME_WIDTH = 1200; // = 5/8 * 1920
+  private static final int MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
 
   private final Context context;
   private final CameraConfigurationManager configManager;
@@ -231,17 +231,11 @@ public final class CameraManager {
         return null;
       }
 
-      /**
       int width = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
       int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
-      **/
-
-      int width = screenResolution.x * 8 / 10;
-      int height = screenResolution.y * 5 / 10;
 
       int leftOffset = (screenResolution.x - width) / 2;
       int topOffset = (screenResolution.y - height) / 2;
-
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
       Log.d(TAG, "Calculated framing rect: " + framingRect);
     }
@@ -278,20 +272,10 @@ public final class CameraManager {
         // Called early, before init even finished
         return null;
       }
-      /** for landscape, marked for portrait
       rect.left = rect.left * cameraResolution.x / screenResolution.x;
       rect.right = rect.right * cameraResolution.x / screenResolution.x;
       rect.top = rect.top * cameraResolution.y / screenResolution.y;
       rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
-      **/
-
-      /** adding for portrait scanning **/
-      rect.left = rect.left * cameraResolution.y / screenResolution.x;
-      rect.right = rect.right * cameraResolution.y / screenResolution.x;
-      rect.top = rect.top * cameraResolution.x / screenResolution.y;
-      rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
-      /** Ending for portrait scanning **/
-
       framingRectInPreview = rect;
     }
     return framingRectInPreview;

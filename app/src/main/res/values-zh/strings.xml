@@ -66,7 +66,6 @@
   <string name="msg_default_meta">元資料</string>
   <string name="msg_default_mms_subject">你好</string>
   <string name="msg_default_status">將條碼置於鏡頭範圍內以進行掃描。</string>
-  <string name="msg_default_scanvalue">你好，掃描值...</string>
   <string name="msg_default_time">時間</string>
   <string name="msg_default_type">類型</string>
   <string name="msg_encode_contents_failed">無法讀取條碼。</string>
