@@ -2,40 +2,58 @@
 <items version="2" >
 
     <item
+        is-multidex="false"
+        jar="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/libs/android-core-3.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="86ce6f89a1d7944bb9814a2ec5520dccd3ee3dce">
+        <dex dex="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/pre-dexed/debug/android-core-3.3.0_2a821c118a4e6ceeb76f45c998a034f8a02cd4b0.jar" />
+    </item>
+    <item
         is-multidex="true"
-        jar="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/libs/core-3.3.0.jar"
+        jar="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/libs/core-3.3.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.0"
         sha1="73c49077166faa4c3c0059c5f583d1d7bd1475fe">
-        <dex dex="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/build/intermediates/transforms/dex/debug/folders/1000/2/core-3.3.0_20f4d904d02e26e78852c5a1a68381da4a4ee32d/classes.dex" />
+        <dex dex="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/transforms/dex/debug/folders/1000/2/core-3.3.0_8d769f86c4c122b8d88e1723cd2b442f13941b95/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/libs/android-core-3.3.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.0"
-        sha1="86ce6f89a1d7944bb9814a2ec5520dccd3ee3dce">
-        <dex dex="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/build/intermediates/transforms/dex/debug/folders/1000/2/android-core-3.3.0_df973d7c9c4fcfc948cd48b16121fdb634bebee5/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_a6a657e4ee32a5804bc0ad2f1e8f13fc59dd845f/classes.dex" />
+        <dex dex="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c1689e2135681ee1cc7b3f84c8f1210f6d90a6ce/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/libs/android-core-3.3.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.0"
-        sha1="02b8f2ae51a4c79c9559c71d90e7f2acacf20496">
-        <dex dex="/Users/cchsu/Desktop/Projects/Barcodescan_zxing(source_file)/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_14815c6f6c8bc5ded1a02e6f893ce9d453f0ee7d/classes.dex" />
+        sha1="86ce6f89a1d7944bb9814a2ec5520dccd3ee3dce">
+        <dex dex="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/transforms/dex/debug/folders/1000/2/android-core-3.3.0_2a821c118a4e6ceeb76f45c998a034f8a02cd4b0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="7350e2b9ab3d2144a6f6ec6a3c3842268aaa4d2b">
+        <dex dex="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_d631bab57a5a2a3a76f69ae5f824ca9fd2210eaa/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/libs/core-3.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="73c49077166faa4c3c0059c5f583d1d7bd1475fe">
+        <dex dex="/Users/cchsu/Desktop/GitHub/BarcodeScanApp_hor-rotate/app/build/intermediates/pre-dexed/debug/core-3.3.0_8d769f86c4c122b8d88e1723cd2b442f13941b95.jar" />
     </item>
 
 </items>
